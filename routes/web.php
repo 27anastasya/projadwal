@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\UserController; //mendaftarkan controller yang akan digunakan
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController; //mendaftarkan controller yang akan digunakan
+use App\Http\Controllers\PositionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //kalau yang dibawah ini untuk mendsaftarkan di route
+
 
 Route::get('register', [UserController::class, 'register'])->name('register');
 Route::post('register', [UserController::class, 'register_action'])->name('register.action');
@@ -28,5 +31,8 @@ Route::middleware('auth')->group(
         Route::get('password', [UserController::class, 'password'])->name('password');
         Route::post('password', [UserController::class, 'password_action'])->name('password.action');
         Route::get('logout', [UserController::class, 'logout'])->name('logout');
+
+        //route position
+        Route::resource('positions', PositionController::class);
     }
 );
