@@ -1,6 +1,11 @@
 @extends('app')
 @section('content')
-
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{session('success')}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
 <div class="text-end mb-2">
     <a class="btn btn-secondary" href="{{ route('positions.create') }}"> Add Position</a>
 </div>
@@ -15,15 +20,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($positions as $data)
+        @foreach ($positions as $position)
         <tr>
-            <td>{{ $data->id }}</td>
-            <td>{{ $data->name }}</td>
-            <td>{{ $data->keterangan }}</td>
-            <td>{{ $data->alias }}</td>
+            <td>{{ $position->id }}</td>
+            <td>{{ $position->name }}</td>
+            <td>{{ $position->keterangan }}</td>
+            <td>{{ $position->alias }}</td>
             <td>
-                <form action="{{ route('positions.destroy',$data->id) }}" method="Post">
-                    <a class="btn btn-primary" href="{{ route('positions.edit',$data->id) }}">Edit</a>
+                <form action="{{ route('positions.destroy',$position->id) }}" method="Post">
+                    <a class="btn btn-primary" href="{{ route('positions.edit',$position->id) }}">Edit</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
