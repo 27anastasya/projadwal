@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController; //mendaftarkan controller yang akan digunakan
 use App\Http\Controllers\PositionController;
@@ -34,5 +35,7 @@ Route::middleware('auth')->group(
 
         //route position
         Route::resource('positions', PositionController::class);
+
+        Route::resource('departements', DepartementController::class);
     }
 );

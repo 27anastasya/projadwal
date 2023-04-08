@@ -1,12 +1,13 @@
 @extends('app')
 @section('content')
-<form action="{{ route('departements.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('departements.update',$departement->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Departement Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Departement Name">
+                <input type="text" name="name" value="{{ $departement->name }}" class="form-control" placeholder="Departement name">
                 @error('name')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -15,7 +16,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Location :</strong>
-                <input type="text" name="location" class="form-control" placeholder="Location">
+                <input type="location" name="location" class="form-control" placeholder="location" value="{{ $departement->location }}">
                 @error('location')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
