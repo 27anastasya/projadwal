@@ -22,19 +22,15 @@
                 @enderror
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <label for="manager_id" class="form-label">Manager Id</label>
-            <select id="manager_id" name="manager_id" class="form-select">
-                <option selected>Choose...</option>
-                <option value="0" <?php if (!empty($_GET['id'])) {
-                                        if ($usr['manager_id'] == 0) {
-                                            echo "selected";
-                                        } else {
-                                            echo "";
-                                        }
-                                    } ?>>1</option>
+        <div class="form-group">
+            <label for="manager_id">Manager</label>
+            <select name="manager_id" class="form-control">
+                @foreach ($managers as $manager)
+                <option value="{{ $manager->id }}">{{ $manager->name }}</option>
+                @endforeach
             </select>
-            <button type="submit" class="btn btn-primary mt-3 ml-3">Submit</button>
         </div>
+        <button type="submit" class="btn btn-primary mt-3 ml-3">Submit</button>
+    </div>
 </form>
 @endsection
