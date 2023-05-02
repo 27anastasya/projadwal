@@ -13,4 +13,8 @@ class Departements extends Model
     {
         return $this->belongsTo(User::class, 'manager_id');
     }
+    public function getManager()
+    {
+        return $this->belongsTo(User::class, 'manager_id', 'id');
+    }
 }

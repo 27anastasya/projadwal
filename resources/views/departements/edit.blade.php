@@ -23,10 +23,11 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="manager_id">Manager</label>
-            <select name="manager_id" class="form-control">
+            <label for="manager_id">Manager:</label>
+            <select name="manager_id" id="manager_id" class="form-select">
+                <option value="">Pilih</option>
                 @foreach ($managers as $manager)
-                <option value="{{ $manager->id }}">{{ $manager->name }}</option>
+                <option value="{{ $manager->id}}" {{ ($manager->id == $departement->manager_id) ? 'selected' : '' }}>{{ $manager->name }}</option>
                 @endforeach
             </select>
         </div>

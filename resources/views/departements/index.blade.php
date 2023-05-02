@@ -15,7 +15,7 @@
             <th scope="col">#</th>
             <th scope="col">Nama</th>
             <th scope="col">Location</th>
-            <th scope="col">Manager Id</th>
+            <th scope="col">Manager Name</th>
             <th width="280px">Action</th>
         </tr>
     </thead>
@@ -25,7 +25,12 @@
             <td>{{ $departement->id }}</td>
             <td>{{ $departement->name }}</td>
             <td>{{ $departement->location }}</td>
-            <td>{{ $departement->manager_id }}</td>
+            <td>{{
+                (isset($departement->getManager->name))?
+                $departement->getManager->name :
+                'Tidak Ada' 
+                }}
+            </td>
             <td>
                 <form action="{{ route('departements.destroy',$departement->id) }}" method="Post">
                     <a class="btn btn-primary" href="{{ route('departements.edit',$departement->id) }}">Edit</a>
