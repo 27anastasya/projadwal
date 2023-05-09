@@ -10,7 +10,7 @@ class PositionController extends Controller
     public function index()
     {
         $title = "Data Position";
-        $positions = Positions::orderBy('id', 'asc')->paginate(5);
+        $positions = Positions::orderBy('id', 'asc')->paginate();
         return view('positions.index', compact(['positions', 'title']));
     }
 

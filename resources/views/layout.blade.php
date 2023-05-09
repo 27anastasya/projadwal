@@ -11,7 +11,7 @@
 <body>
     <div class="container-fluid">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body text-center">
                 <h1>@yield('title', $title)</h1>
                 @yield('content')
             </div>
