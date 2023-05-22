@@ -7,10 +7,9 @@
 </div>
 @endif
 <div class="text-end mb-2">
-                    <a class="btn btn-light" href="{{ route('export-Pdf') }}"> Export</a>
-                    <a class="btn btn-success" href="{{ route('user.create') }}"> Add User</a>
-                    
-                </div>
+  <a class="btn btn-light" href="{{ route('exportpdf') }}"> Export</a>
+  <a class="btn btn-success" href="{{ route('users.create') }}"> Add User</a>
+</div>
 <table id="example" class="table table-striped" style="width:100%">
     <thead>
         <tr>
@@ -24,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-    @foreach ($user as $data)
+    @foreach ($users as $data)
     <tr>
         <td>{{ $data->id }}</td>
         <td>{{ $data->name }}</td>
@@ -39,8 +38,8 @@
             }}
         </td> -->
         <td>
-            <form action="{{ route('user.destroy',$data->id) }}" method="Post">
-                <a class="btn btn-primary" href="{{ route('user.edit',$data->id) }}">Edit</a>
+            <form action="{{ route('users.destroy',$data->id) }}" method="Post">
+                <a class="btn btn-primary" href="{{ route('users.edit',$data->id) }}">Edit</a>
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
