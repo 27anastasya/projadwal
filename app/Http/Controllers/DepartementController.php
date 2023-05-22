@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Departements;
+use Illuminate\Http\Request;
 use App\Models\User;
 use PDF;
 
@@ -11,17 +11,18 @@ class DepartementController extends Controller
 {
     public function index()
     {
-        $title = "Data Departement";
-        $departements = Departements::orderBy('id', 'asc')->paginate();
+        $title = "Data Departements";
+        $departements = Departements::orderBy('id', 'asc')->paginate(5);
         return view('departements.index', compact(['departements', 'title']));
     }
 
     public function create()
     {
-        $title = "Tambah Data Departement";
-        $managers = User::where('position', '1')->get();
-        return view('departements.create', compact(['managers', 'title']));
+        $title = "Tambah data";
+        $managers = User::where('position', 'manager')->get();
+        return view('departements.create', compact('managers', 'title'));
     }
+
 
     public function store(Request $request)
     {
@@ -39,15 +40,16 @@ class DepartementController extends Controller
 
     public function show(Departements $departement)
     {
-        return view('departements.show', compact('departement'));
+        return view('departements.show', compact('departements'));
     }
 
 
     public function edit(Departements $departement)
     {
-        $title = "Edit Data Departement";
-        $managers = User::where('position', '1')->get();
-        return view('departements.edit', compact(['departement', 'managers', 'title']));
+        
+        $title = "Edit Data departement";
+        $managers = User::where('positions', 'manager')->get();
+        return view('departements.edit', compact('departement', 'managers', 'title'));
     }
 
 
@@ -55,27 +57,31 @@ class DepartementController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'location',
-            'manager_id'
+            'location' => 'required',
+            'manager_id' => 'required',
         ]);
 
         $departement->fill($request->post())->save();
 
-        return redirect()->route('departements.index')->with('success', 'Departement Has Been updated successfully');
+        return redirect()->route('departements.index')->with('success', 'Departemnt Has Been updated successfully');
     }
 
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Departements  $departements
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Departements $departement)
     {
         $departement->delete();
-        return redirect()->route('departements.index')->with('success', 'Departement has been deleted successfully');
+        return redirect()->route('departements.index')->with('success', 'departements has been deleted successfully');
     }
-
-    public function exportPDF(Departements $departement)
+    public function exportPdf()
     {
         $title = "Laporan Data Departement";
         $departements = Departements::orderBy('id', 'asc')->get();
-        $pdf = PDF::loadview('departements.pdf',compact(['departements','title']));
-        return $pdf->download('laporan-departements-pdf');
+        $pdf = PDF::loadview('departements.pdf', compact(['departements', 'title']));
+        return $pdf->stream('laporan-departement-pdf');
     }
 }

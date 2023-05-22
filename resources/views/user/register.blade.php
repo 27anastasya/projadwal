@@ -14,7 +14,7 @@
                 <input class="form-control" type="text" name="name" value="{{ old('name') }}" />
             </div>
             <div class="mb-3">
-                <label>Email <span class="text-danger">*</span></label>
+                <label>email <span class="text-danger">*</span></label>
                 <input class="form-control" type="email" name="email" value="{{ old('email') }}" />
             </div>
             <div class="mb-3">

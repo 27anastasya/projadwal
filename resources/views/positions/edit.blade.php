@@ -3,7 +3,7 @@
 <form action="{{ route('positions.update',$position->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <div class="row">
+    <div class="row g-3">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Position Name:</strong>
@@ -32,6 +32,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary mt-3 ml-3">Submit</button>
+        <a class="btn btn-danger" href="{{ route('positions.index') }}">Back</a>
     </div>
 </form>
 @endsection
