@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         <?php $no = 0; ?>
-        @foreach ($user as $data)
+        @foreach ($users as $data)
         <?php $no++; ?>
         <tr>
             <td>{{ $no }}</td>

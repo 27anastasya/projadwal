@@ -12,15 +12,15 @@
 </div>
 <table id="example" class="table table-striped" style="width:100%">
   <thead>
-    <tr style="background-color: #0000FF;">
-      <th scope="col" style="color: #FFFFFF;">No</th>
-      <th scope="col" style="color: #FFFFFF;">Nama</th>
-      <th scope="col" style="color: #FFFFFF;">Location</th>
-      <th scope="col" style="color: #FFFFFF;">Manager_id</th>
-      <th scope="col" style="color: #FFFFFF;">Actions</th>
+    <tr >
+      <th scope="col" >No</th>
+      <th scope="col" >Nama</th>
+      <th scope="col" >Location</th>
+      <th scope="col" >Manager_id</th>
+      <th scope="col" >Actions</th>
     </tr>
   </thead>
-  <tbody style="background-color: #D4EFDF;">
+  <tbody >
     @php $no = 1 @endphp
     @foreach ($departements as $data)
     <tr>

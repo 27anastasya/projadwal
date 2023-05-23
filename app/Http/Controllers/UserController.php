@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;    //Model = Untuk mengekusi database
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Departements;
-use App\Models\Positions;
-use Illuminate\Validation\Rule;
 use PDF;
-
 
 class UserController extends Controller
 {
@@ -88,95 +84,77 @@ class UserController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
-    // latihan tugas
+
+    // TUGAS ADD USER
     public function index()
     {
         $title = "Data User";
-        $users = User::all();
-        return view('users.index', compact('users', 'title'));
+        $user = User::orderBy('id', 'asc')->paginate();
+        return view('users.index', compact(['user', 'title']));
     }
 
     public function create()
     {
-        $title = "Tambah Data";
-        $users = User::all();
-        return view('users.create', compact('users', 'title'));
-       
+        $title = "Tambah data user";
+        return view('users.create', compact(['title']));
     }
+
 
     public function store(Request $request)
     {
-        // Validasi input dari formulir tambah pengguna
-        $validatedData = $request->validate(['name' => 'required',
-            'email' => 'required|email',
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
             'password' => 'required',
             'position' => 'required',
-            'department' => 'required',
+            'departement' => 'required',
         ]);
 
-        // Simpan data pengguna ke dalam database
-        User::create($validatedData);
+        User::create($request->post());
 
-        return redirect()->route('users.index')->with(
-            'success',
-            'User added successfully'
-        );
+        return redirect()->route('users.index')->with('success', 'users has been created successfully.');
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        $title = "Edit User";
-        $user = User::findOrFail($id);
+        $title = "Edit Data position";
         return view('users.edit', compact('user', 'title'));
     }
 
+
+
     public function update(Request $request, $id)
     {
-        // Validasi input dari formulir edit pengguna
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'required|unique:users,email,' . $id,
             'position' => 'required',
-            'department' => 'required',
+            'departement' => 'required',
         ]);
 
-        // Update data pengguna dalam database
         $user = User::findOrFail($id);
-        $user->update($validatedData);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->position = $request->position;
+        $user->departement = $request->departement;
+        $user->save();
 
-        return redirect()->route('users.index')->with(
-            'success',
-            'User updated successfully'
-        );
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
     public function destroy($id)
     {
-        // Hapus data pengguna dari database
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'User deleted successfully');
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 
-    public function show($id)
+    public function exportPdf()
     {
-        $title = "Laporan User";
-        $user = User::findOrFail($id);
-        return view('users.show', compact('user', 'title'));
-    }
-
-    public function exportPDF()
-    {
-        // $users = User::all();
-        // $pdf = PDF::loadView('users.pdf', compact('users'));
-
-        // return $pdf->download('users.pdf');
-
         $title = "Laporan Data User";
         $users = User::orderBy('id', 'asc')->get();
-        $pdf = PDF::loadview('users.pdf', compact(['users', 'title']));
+        $pdf = PDF::loadView('users.pdf', compact(['users', 'title']));
         return $pdf->stream('laporan-user-pdf');
     }
 }

@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-<form action="{{ route('user.update',$user->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('users.update',$user->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="row">
@@ -31,15 +31,7 @@
                 @enderror
             </div>
         </div>
-        <!-- <div class="form-group">
-            <label for="manager_id">Manager:</label>
-            <select name="manager_id" id="manager_id" class="form-select">
-                <option value="">Pilih</option>
-                @foreach ($managers as $manager)
-                <option value="{{ $manager->id}}" {{ ($manager->id == $user->manager_id) ? 'selected' : '' }}>{{ $manager->name }}</option>
-                @endforeach
-            </select>
-        </div> -->
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Position :</strong>

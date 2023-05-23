@@ -2,15 +2,15 @@
 @section('content')
 <table class="table mt-5">
   <thead>
-    <tr style="background-color: #0000FF;">
-      <th scope="col" style="color: #FFFFFF;">No</th>
-      <th scope="col" style="color: #FFFFFF;">Nama</th>
-      <th scope="col" style="color: #FFFFFF;">Keterangan</th>
-      <th scope="col" style="color: #FFFFFF;">Manager_id</th>
+    <tr >
+      <th scope="col" >No</th>
+      <th scope="col" >Nama</th>
+      <th scope="col" >Keterangan</th>
+      <th scope="col" >Manager_id</th>
       <!-- <th scope="col" style="color: #FFFFFF;">Actions</th> -->
     </tr>
   </thead>
-  <tbody style="background-color: #D4EFDF;">
+  <tbody >
     @php $no = 1 @endphp
     @foreach ($departements as $data)
     <tr>
