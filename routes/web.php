@@ -4,6 +4,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\MahasiswaController;
+use App\Models\Mahasiswa;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +47,7 @@ Route::middleware('auth')->group(function () {
     // Route user
     Route::get('users/exportpdf', [UserController::class, 'exportPdf'])->name('users.exportpdf');
     Route::resource('users', UserController::class);
+
+    //Route mahasiswa
+    Route::get('search/mahasiswa', [MahasiswaController::class, 'autocomplete'])->name('search.mahasiswa');
 });
