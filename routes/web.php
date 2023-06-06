@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\JadwalController;
 use App\Models\Mahasiswa;
 
 /*
@@ -50,4 +51,8 @@ Route::middleware('auth')->group(function () {
 
     //Route mahasiswa
     Route::get('search/mahasiswa', [MahasiswaController::class, 'autocomplete'])->name('search.mahasiswa');
+    Route::resource('mahasiswa', MahasiswaController::class);
+
+    //Route jadwal
+    Route::resource('jadwals', JadwalController::class);
 });

@@ -14,11 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('mahasiswas', function (Blueprint $table) {
-            $table->id();
-            $table->string('id_mahasiswa')->nullable();
-            $table->string('nama_dosen')->nullable();
-            $table->string('mata_kuliah')->nullable();
-            $table->string('ruangan')->nullable();
+            $table->integer('id_mahasiswa')->nullable();
+            $table->string('nama_mahasiswa')->nullable();
             $table->timestamps();
         });
     }
