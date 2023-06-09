@@ -8,21 +8,22 @@
 @endif
 <div class="text-end mb-2">
   <a class="btn btn-light" href="{{ route('exportpdf') }}"> Export</a>
-  <a class="btn btn-success" href="{{ route('departements.create') }}"> Add Jadwal</a>
+  <a class="btn btn-success" href="{{ route('jadwals.create') }}"> Add Jadwal</a>
 </div>
 <table id="example" class="table table-striped" style="width:100%">
   <thead>
-    <tr >
-      <th scope="col" >No</th>
-      <th scope="col" >Nama</th>
-      <th scope="col" >Location</th>
-      <th scope="col" >Manager_id</th>
-      <th scope="col" >Actions</th>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Nama Kelas</th>
+      <th scope="col">Ruangan</th>
+      <th scope="col">Nama Dosen</th>
+      <th scope="col">Hari</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
-  <tbody >
+  <tbody>
     @php $no = 1 @endphp
-    @foreach ($departements as $data)
+    @foreach ($jadwals as $data)
     <tr>
       <td>{{ $no ++ }}</td>
       <!-- <td>{{ $data->id }}</td> -->
@@ -33,8 +34,8 @@
       $data->manager->name : 
     'Tidak Ada'}}</td>
       <td>
-        <form action="{{ route('departements.destroy',$data->id) }}" method="Post">
-          <a class="btn btn-primary" href="{{ route('departements.edit',$data->id) }}">Edit</a>
+        <form action="{{ route('jadwals.destroy',$data->id) }}" method="Post">
+          <a class="btn btn-primary" href="{{ route('jadwals.edit',$data->id) }}">Edit</a>
           @csrf
           @method('DELETE')
           <button type="submit" class="btn btn-danger">Delete</button>

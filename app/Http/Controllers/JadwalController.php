@@ -10,7 +10,7 @@ class JadwalController extends Controller
 {
     public function index()
     {
-        $title = "Data JADWAL";
+        $title = "Data Penempatan Jadwal";
         $jadwals = Jadwal::orderBy('id', 'asc')->paginate(5);
         return view('jadwals.index', compact(['jadwals', 'title']));
     }
@@ -29,17 +29,23 @@ class JadwalController extends Controller
         ]);
 
         $jadwal = [
-            'nama_kelas' => $request-> nama_kelas,
-            'ruangan' => $request-> ruangan,
-            'nama_dosen' => $request-> nama_dosen,
-            'tanggal' => $request-> tanggal,
+            'nama_kelas' => $request->nama_kelas,
+            'ruangan' => $request->ruangan,
+            'nama_dosen' => $request->nama_dosen,
+            'tanggal' => $request->tanggal,
         ];
-        
-
-        dd($request);
-
-        Jadwal::create($request->post());
-
+        if ($result = Jadwal::create($jadwal)) {
+            for ($i = 1; $i <= $request->jml; $i++) {
+                $details = [
+                    'id_dosen' => $request->id_dosen,
+                    'id_mahasiswa' => $request['id_mahasiswa' . $i],
+                    'mata_kuliah' => $request['mata_kuliah' . $i],
+                    'ruangan' => $request['ruangan' . $i],
+                    'hari' => $request['hari' . $i],
+                ];
+                Jadwal::create($request->post());
+            }
+        }
         return redirect()->route('jadwals.index')->with('success', 'Jadwal has been created successfully.');
     }
 

@@ -32,7 +32,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Tanggal :</strong>
+                <strong>Hari :</strong>
                 <input type="date" name="tanggal" class="form-control" placeholder="Tanggal">
                 @error('location')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -68,11 +68,9 @@
             <table id="example" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nama Kelas</th>
-                        <th scope="col">Ruangan</th>
-                        <th scope="col">Nama Dosen</th>
-                        <th scope="col">Tanggal</th>
+                        <th scope="col">No</th>
+                        <th scope="col">NIM</th>
+                        <th scope="col">Nama Mahasiswa</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -80,6 +78,15 @@
 
                 </tbody>
             </table>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Jumlah Mahasiswa :</strong>
+                <input type="text" name="jumlah" class="form-control" placeholder="Jumlah Mahasiswa">
+                @error('hari')
+                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
         <button type="submit" class="btn btn-primary mt-3 ml-3">Submit</button>
     </div>
@@ -105,13 +112,13 @@
         },
         select: function(event, ui) {
             $('#search').val(ui.item.label);
-            console.log(ui.item);
-            add();
+            // console.log(ui.item);
+            add(ui.item.id);
             return false;
         }
     });
 
-    function add() {
+    function add(id) {
         const path = "{{ route('mahasiswa.index')}}/" + id;
         var html = "";
         var no = 0;
@@ -127,16 +134,24 @@
                 console.log(data);
                 no++;
                 html += '<tr>' +
-                    '<td>' + no + '<input type="hidden" name="id_jadwal' + no + '" class="form-control" value"' + data.id_jadwal + '"></td>' +
-                    '<td><input type="text" name="nama_kelas' + no + '" class="form-control"value"' + data.nama_kelas + '"></td>' +
-                    '<td><input type="text" name="ruangan' + no + '" class="form-control"value"' + data.ruangan + '"></td>' +
-                    '<td><input type="text" name="nama_dosen' + no + '" class="form-control"value"' + data.nama_dosen + '"></td>' +
-                    '<td><input type="text" name="tanggal' + no + '" class="form-control"value"' + data.tanggal + '"></td>' +
-                    '<td><a href="#" class="btn btn-sm btn-danger">X</a></td>' +
+                    '<td>' + no + '<input type="hidden" name="id' + no + '" class="form-control" value"' + data.id + '"></td>' +
+                    '<td><input type="text" name="nim' + no + '" class="form-control"value"' + data.nim + '"></td>' +
+                    '<td><input type="text" name="nama_mahasiswa' + no + '" class="form-control"value"' + data.nama_mahasiswa + '"></td>' +
+                    '<td><a href="#" class="btn btn-sm btn-danger">Delete</a></td>' +
                     '</tr>';
                 $('#detail').html(html);
             }
         });
     }
+
+    // //rumus penjumlahan atau di excel bisa disebut sum
+    // function sumTotal(){
+    //     var total = 0;
+    //     for(let i = 1; i <= $("input[name=jml").val();i++){
+    //         var sub = $("input[name=sub_total"+i+"]").val();
+    //         total = total + parseInt(sub);
+    //     }
+    //     $("input[name=total]").val(total);
+    // }
 </script>
 @endsection

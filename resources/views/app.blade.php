@@ -56,6 +56,9 @@
                           <li class="nav-item">
                             <a class="nav-link" href="{{route('users.index')}}">User</a>
                           </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{route('jadwals.index')}}">Jadwal</a>
+                          </li>
                           @if(Auth()->user()->position =="0")
                           <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -107,6 +110,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     @yield('js')
 </body>
 
