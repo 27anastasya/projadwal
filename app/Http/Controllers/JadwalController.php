@@ -25,17 +25,18 @@ class JadwalController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'id' => 'required',
-        ]);
+        dd($request->all());
+        // $details->validate([
+        //     'id' => 'required',
+        // ]);
 
-        $jadwal = [
+        $jadwals = [
             'nama_kelas' => $request->nama_kelas,
             'ruangan' => $request->ruangan,
             'nama_dosen' => $request->nama_dosen,
             'tanggal' => $request->tanggal,
         ];
-        if ($result = Jadwal::create($jadwal)) {
+        if ($result = Jadwal::create($jadwals)) {
             for ($i = 1; $i <= $request->jml; $i++) {
                 $details = [
                     'id_dosen' => $request->id,
@@ -43,7 +44,7 @@ class JadwalController extends Controller
                     'mata_kuliah' => $request['mata_kuliah' . $i],
                     'jumlah_sks' => $request['jumlah_sks' . $i],
                 ];
-                Jadwal::create($request->post());
+                JadwalDetail::create($request->post());
             }
         }
         return redirect()->route('jadwals.index')->with('success', 'Jadwal has been created successfully.');
