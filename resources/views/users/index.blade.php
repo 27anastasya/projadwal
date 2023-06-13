@@ -13,7 +13,7 @@
 <table id="example" class="table table-striped" style="width:100%">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">No</th>
             <th scope="col">Nama</th>
             <th scope="col">Email</th>
 

@@ -17,7 +17,7 @@
       <th scope="col">Nama Kelas</th>
       <th scope="col">Ruangan</th>
       <th scope="col">Nama Dosen</th>
-      <th scope="col">Hari</th>
+      <th scope="col">Tanggal</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -27,12 +27,10 @@
     <tr>
       <td>{{ $no ++ }}</td>
       <!-- <td>{{ $data->id }}</td> -->
-      <td>{{ $data->name }}</td>
-      <td>{{ $data->location }}</td>
-      <td>{{
-        (isset($data->manager->name))?
-      $data->manager->name : 
-    'Tidak Ada'}}</td>
+      <td>{{ $data->nama_kelas }}</td>
+      <td>{{ $data->ruangan }}</td>
+      <td>{{ $data->nama_dosen }}</td>
+      <td>{{ $data->tanggal }}</td>
       <td>
         <form action="{{ route('jadwals.destroy',$data->id) }}" method="Post">
           <a class="btn btn-primary" href="{{ route('jadwals.edit',$data->id) }}">Edit</a>

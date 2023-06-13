@@ -55,4 +55,8 @@ Route::middleware('auth')->group(function () {
 
     //Route jadwal
     Route::resource('jadwals', JadwalController::class);
+
+    //Route Chart Jadwal
+    Route::get('home', [JadwalController::class, 'chartLine']);
+    Route::get('chart-line-ajax', [JadwalController::class, 'chartLineAjax'])->name('jadwal.chartLineAjax');
 });

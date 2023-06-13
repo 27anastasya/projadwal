@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jadwal_detail extends Model
+class JadwalDetail extends Model
 {
     use HasFactory;
     protected $fillable = [
         'id_dosen',
         'id_mahasiswa',
         'mata_kuliah',
-        'ruangan',
-        'hari'
+        'jumlah_sks'
     ];
 
     public function getMahasiswa()

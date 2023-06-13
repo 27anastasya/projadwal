@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_dosen')->nullable();
+            $table->string('nama_kelas')->nullable();
+            $table->string('ruangan')->nullable();
             $table->string('nama_dosen')->nullable();
+            $table->string('tanggal')->nullable();
             $table->timestamps();
         });
     }

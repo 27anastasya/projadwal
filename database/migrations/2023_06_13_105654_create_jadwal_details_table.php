@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('jadwal_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_dosen')->nullable();
-            $table->integer('id_mahasiswa')->nullable();
+            $table->string('id_dosen')->nullable();
+            $table->string('id_mahasiswa')->nullable();
             $table->string('mata_kuliah')->nullable();
-            $table->string('ruangan')->nullable();
-            $table->string('hari')->nullable();
+            $table->string('jumlah_sks')->nullable();
             $table->timestamps();
         });
     }
