@@ -21,29 +21,29 @@
                         @csrf
                         @method('PUT')
                         <div class="card-body">
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <strong>departements:</strong>
-                                        <input type="text" name="name" value="{{ $departement->name }}" class="form-control" placeholder="departement name">
+                                        <strong>Departements:</strong>
+                                        <input type="text" name="name" value="{{ $departement->name }}" class="form-control" placeholder="Departement Name">
                                         @error('name')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <div class="form-group">
-                                    <strong>location:</strong>
-                                    <input type="location" name="location" class="form-control" placeholder="location" value="{{ $departement->location }}">
+                                    <strong>Location:</strong>
+                                    <input type="location" name="location" class="form-control" placeholder="Location" value="{{ $departement->location }}">
                                     @error('location')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                     @enderror
                                 </div>
 
-                                <div class="col-md-8">
+                                <div class="col-md-10">
                                     <div class="form-group">
-                                        <label for="manager_id">Manager</label>
+                                        <strong for="manager_id">Manager</strong>
                                         <select name="manager_id" id="manager_id" class="form-control">
                                             <option value="">Pilih</option>
                                             @foreach ($managers as $manager)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
 use App\Models\User;
+use App\Models\JadwalDetail;
 use Illuminate\Http\Request;
 use App\Charts\JadwalLineChart;
 
@@ -13,7 +14,7 @@ class JadwalController extends Controller
     {
         $title = "Data Penempatan Jadwal";
         $jadwals = Jadwal::orderBy('id', 'asc')->get();
-        return view('jadwals.index', compact(['jadwals', 'title']));
+        return view('jadwals.index', compact('jadwals', 'title'));
     }
 
     public function create()
@@ -25,60 +26,65 @@ class JadwalController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
-        // $details->validate([
-        //     'id' => 'required',
-        // ]);
+        $request->validate([
+            'nama_kelas' => 'required',
+        ]);
 
-        $jadwals = [
-            'nama_kelas' => $request->nama_kelas,
-            'ruangan' => $request->ruangan,
-            'nama_dosen' => $request->nama_dosen,
-            'tanggal' => $request->tanggal,
-        ];
-        if ($result = Jadwal::create($jadwals)) {
-            for ($i = 1; $i <= $request->jml; $i++) {
-                $details = [
-                    'id_dosen' => $request->id,
-                    'id_mahasiswa' => $request['id_mahasiswa' . $i],
-                    'mata_kuliah' => $request['mata_kuliah' . $i],
-                    'jumlah_sks' => $request['jumlah_sks' . $i],
-                ];
-                JadwalDetail::create($request->post());
-            }
+        $jadwal = new Jadwal;
+        $jadwal->nama_kelas = $request->nama_kelas;
+        $jadwal->ruangan = $request->ruangan;
+        $jadwal->nama_dosen = $request->nama_dosen;
+        $jadwal->tanggal = $request->tanggal;
+        $jadwal->save();
+
+        $jadwalId = $jadwal->id;
+
+        for ($i = 1; $i <= $request->jml; $i++) {
+            $details = new JadwalDetail;
+            $details->id_dosen = $jadwalId;
+            $details->id_mahasiswa = $request['id_mahasiswa' . $i];
+            $details->mata_kuliah = $request['mata_kuliah' . $i];
+            $details->jumlah_sks = $request['jumlah_sks' . $i];
+            $details->save();
         }
+
         return redirect()->route('jadwals.index')->with('success', 'Jadwal has been created successfully.');
     }
 
     public function show(Jadwal $jadwal)
     {
-        return view('jadwals.show', compact('Departement'));
+        return view('jadwals.show', compact('jadwal'));
     }
 
     public function edit(Jadwal $jadwal)
     {
         $title = "Edit Data Jadwal";
-        $jadwal = Jadwal::where('position', '1')->orderBy('id', 'asc')->get();
-        return view('jadwals.edit', compact('departement', 'title', 'managers'));
+        $managers = User::where('position', '1')->orderBy('id', 'asc')->get();
+        return view('jadwals.edit', compact('title', 'jadwal', 'managers'));
     }
 
     public function update(Request $request, Jadwal $jadwal)
     {
         $request->validate([
-            'name' => 'required',
-            'location' => 'required',
-            'manager_id' => 'required',
+            'nama_kelas' => 'required',
+            'ruangan' => 'required',
+            'nama_dosen' => 'required',
+            'tanggal' => 'required',
         ]);
 
-        $jadwal->fill($request->post())->save();
+        $jadwal->nama_kelas = $request->nama_kelas;
+        $jadwal->ruangan = $request->ruangan;
+        $jadwal->nama_dosen = $request->nama_dosen;
+        $jadwal->tanggal = $request->tanggal;
+        $jadwal->save();
 
-        return redirect()->route('jadwals.index')->with('success', 'Jadwal Has Been updated successfully');
+        return redirect()->route('jadwals.index')->with('success', 'Jadwal has been updated successfully.');
     }
 
     public function destroy(Jadwal $jadwal)
     {
         $jadwal->delete();
-        return redirect()->route('jadwals.index')->with('success', 'Jadwal has been deleted successfully');
+        return redirect()->route('jadwals.index')->with('success', 'Jadwal has been deleted successfully.');
     }
 
     public function chartLine()
@@ -91,22 +97,17 @@ class JadwalController extends Controller
         return view('home', compact('chart', 'title'));
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     public function chartLineAjax(Request $request)
     {
         $year = $request->has('year') ? $request->year : date('Y');
         $jadwals = Jadwal::select(\DB::raw("COUNT(*) as count"))
             ->whereYear('tanggal', $year)
-            ->groupBy(\DB::raw("Month(tanggal)"))
+            ->groupBy(\DB::raw("MONTH(tanggal)"))
             ->pluck('count');
 
         $chart = new JadwalLineChart;
 
-        $chart->dataset('New Jadwal Register Chart', 'bar', $jadwals)->options([
+        $chart->dataset('Jadwal Penempatan Mahasiswa Chart', 'line', $jadwals)->options([
             'fill' => 'true',
             'borderColor' => '#51C1C0'
         ]);

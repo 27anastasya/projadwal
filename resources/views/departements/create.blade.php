@@ -19,7 +19,7 @@
                     <form action="{{ route('departements.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <div class="form-group">
                                     <strong>Name:</strong>
                                     <input type="text" name="name" class="form-control" placeholder="Name">
@@ -28,7 +28,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <div class="form-group">
                                     <strong>Location:</strong>
                                     <input type="location" name="location" class="form-control" placeholder="Location">
@@ -37,7 +37,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-8">
+                                <div class="col-md-10">
                                     <div class="form-group">
                                         <label for="manager_id">Manager</label>
                                         <select name="manager_id" class="form-control">

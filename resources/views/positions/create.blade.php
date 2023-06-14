@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">Create Position</div>
                     <div class="card-body">
-                        <div class="card">
+                        
                             <div class="row g-3">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
@@ -37,8 +37,10 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary ml-3">Submit</button>
-                                <a class="btn btn-danger" href="{{ route('positions.index') }}">Back</a>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary mt-2 ml-2">Submit</button>
+                                    <a class="btn btn-danger mt-2" href="{{ route('positions.index') }}">Back</a>
+                                </div>
                             </div>
 </form>
 @endsection
