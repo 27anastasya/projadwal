@@ -107,7 +107,7 @@ class JadwalController extends Controller
 
         $chart = new JadwalLineChart;
 
-        $chart->dataset('Jadwal Penempatan Mahasiswa Chart', 'line', $jadwals)->options([
+        $chart->dataset('Jadwal Penempatan Mahasiswa Chart', 'bar', $jadwals)->options([
             'fill' => 'true',
             'borderColor' => '#51C1C0'
         ]);

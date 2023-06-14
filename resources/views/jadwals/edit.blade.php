@@ -11,7 +11,7 @@
                     @csrf
                     @method('PUT')
                     <div class="card-body">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <strong>Nama Kelas:</strong>
                                 <input type="text" name="nama_kelas" class="form-control" placeholder="Nama Kelas" value="{{ $jadwal->nama_kelas }}">
