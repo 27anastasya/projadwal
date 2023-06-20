@@ -60,7 +60,8 @@ class JadwalController extends Controller
     {
         $title = "Edit Data Jadwal";
         $managers = User::where('position', '1')->orderBy('id', 'asc')->get();
-        return view('jadwals.edit', compact('title', 'jadwal', 'managers'));
+        $detail = JadwalDetail::where('id_dosen', $jadwal->id_dosen)->orderBy('id', 'asc')->get();
+        return view('jadwals.edit', compact('title', 'jadwal', 'managers','detail'));
     }
 
     public function update(Request $request, Jadwal $jadwal)

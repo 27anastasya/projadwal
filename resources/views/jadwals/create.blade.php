@@ -51,7 +51,7 @@
                                 <div class="col-md-10 form-group">
                                     <input type="text" name="search" id="search" class="form-control"
                                         placeholder="Masukkan Nama Mahasiswa">
-                                    @error('search')
+                                    @error('nim')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -84,7 +84,7 @@
                                 <div class="form-group">
                                     <strong>Jumlah Mahasiswa:</strong>
                                     <input type="text" name="jml" class="form-control" placeholder="Jumlah Mahasiswa">
-                                    @error('jml')
+                                    @error('nama_mahasiswa')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -153,7 +153,7 @@
                     console.log(data);
                     no++;
                     html += '<tr>' +
-                        '<td>' + no + '<input type="hidden" name="id' + no + '" class="form-control" value="' + data.id + '"></td>' +
+                        '<td>' + no + '<input type="hidden" name="id_mahasiswa' + no + '" class="form-control" value="' + data.id + '"></td>' +
                         '<td><input type="text" name="nim' + no + '" class="form-control" value="' + data.nim + '"></td>' +
                         '<td><input type="text" name="nama_mahasiswa' + no + '" class="form-control" value="' + data.nama_mahasiswa + '"></td>' +
                         '<td><input type="text" name="mata_kuliah' + no + '" class="form-control"' + data.mata_kuliah + '"></td>' +

@@ -14,4 +14,14 @@ class Jadwal extends Model
         'nama_dosen',
         'tanggal'
     ];
+
+    public function detail()
+    {
+        return $this->hasMany(JadwalDetail::class, 'id_dosen', 'id_dosen');
+    }
+
+    // public function getManager()
+    // {
+    //     return $this->belongsTo(User::class, 'ketua', 'id');
+    // }
 }

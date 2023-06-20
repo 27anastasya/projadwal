@@ -18,6 +18,7 @@
       <th scope="col">Ruangan</th>
       <th scope="col">Nama Dosen</th>
       <th scope="col">Tanggal</th>
+      <th scope="col">Jumlah</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -31,6 +32,7 @@
       <td>{{ $data->ruangan }}</td>
       <td>{{ $data->nama_dosen }}</td>
       <td>{{ $data->tanggal }}</td>
+      <td>{{ $data->detail->count() }}</td>
       <td>
         <form action="{{ route('jadwals.destroy',$data->id) }}" method="Post">
           <a class="btn btn-primary" href="{{ route('jadwals.edit',$data->id) }}">Edit</a>

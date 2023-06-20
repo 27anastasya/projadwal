@@ -1,7 +1,5 @@
 @extends('app')
 @section('content')
-
-@method('PUT')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -52,7 +50,7 @@
                             <div class="row col-xs-12 col-sm-12 col-md-12 mt-3">
                                 <div class="col-md-10 form-group">
                                     <input type="text" name="search" id="search" class="form-control" placeholder="Masukkan Nama Mahasiswa">
-                                    @error('search')
+                                    @error('nama_mahasiswa')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -75,7 +73,32 @@
                                         </tr>
                                     </thead>
                                     <tbody id="detail">
-
+                                    <?php $no=0; ?>
+                @foreach($detail as $item)
+                <?php $no++?>
+                <tr>
+                    <td>
+                        <input type="hidden" name="id_mahasiswa{{$no}}" class="form-control" value="{{$item->id_mahasiswa}}">
+                        <span>{{$no}}</span>
+                    </td>
+                    <td>
+                        <input type="text" name="nim{{$no}}" class="form-control" value="{{$item->nim}}">
+                    </td>
+                    <td>
+                        <input type="text" name="nama_mahasiswa{{$no}}" class="form-control" value="{{$item->getMahasiswa->nama_mahasiswa}}">
+                    </td>
+                    <td>
+                        <input type="text" name="mata_kuliah{{$no}}" class="form-control" value="{{$item->mata_kuliah}}">
+                    </td>
+                    <td>
+                        <input type="text" name="jumlah_sks{{$no}}" class="form-control" value="{{$item->jumlah_sks}}" >
+                    </td>
+                
+                    <td>
+                        <a href="#" class="btn btn-sm btn-danger">X</a>
+                    </td>
+                </tr>
+                @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -153,7 +176,7 @@
                     console.log(data);
                     no++;
                     html += '<tr>' +
-                        '<td>' + no + '<input type="hidden" name="id' + no + '" class="form-control" value="' + data.id + '"></td>' +
+                        '<td>' + no + '<input type="hidden" name="id_mahasiswa' + no + '" class="form-control" value="' + data.id + '"></td>' +
                         '<td><input type="text" name="nim' + no + '" class="form-control" value="' + data.nim + '"></td>' +
                         '<td><input type="text" name="nama_mahasiswa' + no + '" class="form-control" value="' + data.nama_mahasiswa + '"></td>' +
                         '<td><input type="text" name="mata_kuliah' + no + '" class="form-control"' + data.mata_kuliah + '"></td>' +
