@@ -12,7 +12,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         $title = "Data Mahasiswa";
-        $mahasiswas = Jadwal::orderBy('id', 'asc')->get();
+        $mahasiswas = Mahasiswa::orderBy('id', 'asc')->get();
         return view('mahasiswas.index', compact('mahasiswas', 'title'));
     }
 
@@ -62,7 +62,11 @@ class MahasiswaController extends Controller
 
         return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa Has Been updated successfully');
     }
-
+    public function destroy(Mahasiswa $mahasiswa)
+    {
+        $mahasiswa->delete();
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa has been deleted successfully');
+    }
     public function autocomplete(Request $request)
     {
         $data = Mahasiswa::select("nama_mahasiswa as value", "id")
@@ -78,11 +82,6 @@ class MahasiswaController extends Controller
      * @param  \App\Mahasiswa  $mahasiswas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mahasiswa $mahasiswa)
-    {
-        $mahasiswa->delete();
-        return redirect()->route('mahasiswas.index')->with('success', 'mahasiswa has been deleted successfully');
-    }
     public function exportPdf()
     {
         $title = "Laporan Data Mahasiswa";

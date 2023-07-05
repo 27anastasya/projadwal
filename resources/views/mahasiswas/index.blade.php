@@ -2,11 +2,12 @@
 @section('content')
 @if(session('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  {{session('success')}}
+  {{ session('success') }}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
 <div class="text-end mb-2">
+  <a class="btn btn-light" href="{{ route('exportpdf') }}"> Export</a>
   <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Add Mahasiswa</a>
 </div>
 <table id="example" class="table table-striped" style="width:100%">
@@ -23,12 +24,11 @@
     @foreach ($mahasiswas as $data)
     <tr>
       <td>{{ $no++ }}</td>
-      <!-- <td>{{ $data->id }}</td> -->
       <td>{{ $data->nim }}</td>
       <td>{{ $data->nama_mahasiswa }}</td>
       <td>
-        <form action="{{ route('mahasiswa.destroy',$data->id) }}" method="POST">
-          <a class="btn btn-primary" href="{{ route('mahasiswa.edit',$data->id) }}">Edit</a>
+        <form action="{{ route('mahasiswa.destroy', $data->id) }}" method="POST">
+          <a class="btn btn-primary" href="{{ route('mahasiswa.edit', $data->id) }}">Edit</a>
           @csrf
           @method('DELETE')
           <button type="submit" class="btn btn-danger">Delete</button>
@@ -39,10 +39,4 @@
   </tbody>
 </table>
 @endsection
-@section('js')
-<script>
-  $(document).ready(function() {
-    $('#example').DataTable();
-  });
-</script>
-@endsection
+
